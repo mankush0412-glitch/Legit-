@@ -1,0 +1,53 @@
+services:
+    - type: web
+      name: legit-stocks-bot
+      env: python
+      plan: free
+      buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
+      startCommand: python -m bot.main
+      healthCheckPath: /health
+      envVars:
+        - key: PYTHON_VERSION
+          value: "3.11.0"
+        - key: BOT_TOKEN
+          sync: false
+        - key: ADMIN_IDS
+          sync: false
+        - key: MONGO_URI
+          sync: false
+        - key: DB_NAME
+          value: legit_stocks_bot
+        - key: TELEGRAM_API_ID
+          sync: false
+        - key: TELEGRAM_API_HASH
+          sync: false
+        - key: BOT_NAME
+          value: Legit Stocks Bot
+        - key: SUPPORT_USERNAME
+          sync: false
+        - key: REFERRAL_BONUS
+          value: "10.0"
+        - key: REFERRAL_PERCENT
+          value: "3.0"
+        - key: UPI_ID
+          sync: false
+        - key: UPI_NAME
+          sync: false
+        - key: USDT_ADDRESS
+          sync: false
+        - key: USDT_NETWORK
+          value: TRC20
+        - key: AUTO_APPROVE_UPI
+          value: "true"
+        - key: AUTO_APPROVE_CRYPTO
+          value: "true"
+        - key: CRYPTO_EXCHANGE_RATE
+          value: "83.0"
+        - key: PORT
+          value: "10000"
+        - key: RENDER_EXTERNAL_URL
+          fromService:
+            name: legit-stocks-bot
+            type: web
+            property: url
+  
